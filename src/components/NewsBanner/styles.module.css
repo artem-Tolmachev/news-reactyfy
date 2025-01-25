@@ -1,0 +1,13 @@
+.banner{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+}
+.title{
+    font-style: 16px;
+}
+.extra{
+    font-style: 12px;
+    color: rgb(122, 109, 109);
+}
