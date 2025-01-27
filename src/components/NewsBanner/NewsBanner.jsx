@@ -3,7 +3,7 @@ import {formatTimeAgo} from '../../helpers/formatTimeAgo';
 import Img from '../image/Img';
 
 const NewsBanner = ({item}) => {
-    console.log()
+   
     return(
         <div className={styles.banner}>
             <Img image={item?.image}/>
