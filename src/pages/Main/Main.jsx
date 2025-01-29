@@ -1,13 +1,17 @@
 import NewsBanner from '../../components/NewsBanner/NewsBanner';
 import { getNews } from '../../api/apiNews';
+import {getCategories} from '../../api/apiNews';
 import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 import NewsList from "../../components/NewsList/NewsList";
 import Sceleton from "../../components/Sceleton/Sceleton";
 import Pagination from "../../components/Pagination/Pagination";
+import Categories from '../../components/Categories/Categories';
 
 const Main = () => {
   const [news, setNews] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 10;
@@ -16,7 +20,12 @@ const Main = () => {
   const fetchNews = async (currentPage) => {
     try {
       setIsLoading(true)
-      const response = await getNews(currentPage, PageSize)
+      const response = await getNews({
+          page_number: currentPage, 
+          page_size: PageSize,
+          category: selectedCategory === 'All' ? null : selectedCategory
+        }
+      )
       setNews(response.news)
       setIsLoading(false)
     } catch (error) {
@@ -24,9 +33,22 @@ const Main = () => {
     }
   }
 
+  const fetchCategories = async () => {
+    try {
+      const response = await getCategories()
+      setCategories(['All', ...response.categories]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+useEffect(() => {
+  fetchCategories();
+}, [])
+
   useEffect(() => {
     fetchNews(currentPage);
-  }, [currentPage])
+  }, [currentPage, selectedCategory])
 
   const handleNextPage = () => {
     if(currentPage < totalPages) {
@@ -46,6 +68,11 @@ const Main = () => {
 
   return (
     <main className={styles.main}>
+      <Categories 
+      categories={categories} 
+      setSelectedCategory={setSelectedCategory} 
+      selectedCategory={selectedCategory}/>
+
       {news.length > 0 && !isLoading ? <NewsBanner item={news[0]} /> : <Sceleton type={'banner'} count={1} />}
       <Pagination 
       totalPages={totalPages}

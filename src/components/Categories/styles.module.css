@@ -1,0 +1,23 @@
+.categories{
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    width: 100%;
+    gap: 8px;  
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+.item, .active{
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 32px;
+    background-color: rgb(221, 221, 221);
+}
+.active{
+    background-color: rgb(114, 29, 148);
+    color: rgb(208, 143, 231);
+    font-weight: bold;
+}
