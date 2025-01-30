@@ -7,6 +7,8 @@ import NewsList from "../../components/NewsList/NewsList";
 import Sceleton from "../../components/Sceleton/Sceleton";
 import Pagination from "../../components/Pagination/Pagination";
 import Categories from '../../components/Categories/Categories';
+import Search from '../../components/Search/Search';
+import { useDebounce } from '../../helpers/hooks/useDebounce';
 
 const Main = () => {
   const [news, setNews] = useState([]);
@@ -14,8 +16,10 @@ const Main = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
+  const [keywords, setKeywords] = useState('');
   const totalPages = 10;
   const PageSize = 10;
+  const debouncedKeywords = useDebounce(keywords, 1500);
 
   const fetchNews = async (currentPage) => {
     try {
@@ -23,7 +27,8 @@ const Main = () => {
       const response = await getNews({
           page_number: currentPage, 
           page_size: PageSize,
-          category: selectedCategory === 'All' ? null : selectedCategory
+          category: selectedCategory === 'All' ? null : selectedCategory,
+          keywords
         }
       )
       setNews(response.news)
@@ -42,13 +47,13 @@ const Main = () => {
     }
   }
 
-useEffect(() => {
-  fetchCategories();
-}, [])
+  useEffect(() => {
+    fetchCategories();
+  }, [])
 
   useEffect(() => {
     fetchNews(currentPage);
-  }, [currentPage, selectedCategory])
+  }, [currentPage, selectedCategory, debouncedKeywords])
 
   const handleNextPage = () => {
     if(currentPage < totalPages) {
@@ -72,6 +77,7 @@ useEffect(() => {
       categories={categories} 
       setSelectedCategory={setSelectedCategory} 
       selectedCategory={selectedCategory}/>
+      <Search keywords={keywords} setKeywords={setKeywords}/>
 
       {news.length > 0 && !isLoading ? <NewsBanner item={news[0]} /> : <Sceleton type={'banner'} count={1} />}
       <Pagination 
