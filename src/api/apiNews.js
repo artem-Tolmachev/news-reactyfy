@@ -18,6 +18,7 @@ export const getNews = async ({ page_number = 1,
                 keywords
             }
         })
+
         return response.data;
     } catch (error){
         console.log(error);

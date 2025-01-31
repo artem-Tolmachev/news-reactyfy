@@ -8,6 +8,9 @@
     white-space: nowrap;
     scrollbar-width: none;
 }
+&::-webkit-scrollbar {
+    display: none;
+}
 .item, .active{
     padding: 8px 16px;
     display: flex;

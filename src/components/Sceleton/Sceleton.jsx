@@ -1,5 +1,5 @@
-
 import styles from './styles.module.css';
+
 const Sceleton = ({count=1, type='banner'}) => {
    
     return(
