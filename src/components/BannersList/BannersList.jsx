@@ -4,7 +4,7 @@ import NewsBanner from '../../components/NewsBanner/NewsBanner';
 import Img from '../image/Img';
 
 const BannersList = ({banners}) => {
-   
+
     return(
         <ul className={styles.banners}>
             {banners?.map(banner => {
