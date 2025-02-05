@@ -6,7 +6,7 @@ import { getLatestNews } from '../../api/apiNews';
 
     const LatestNews = () => {
 
-      const { data, isLoading } = useFetch(getLatestNews);
+    const { data, isLoading } = useFetch(getLatestNews);
   
     return(
         <section className={styles.section}>
