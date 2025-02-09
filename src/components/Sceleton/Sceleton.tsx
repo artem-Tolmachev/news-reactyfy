@@ -1,6 +1,13 @@
+import { DirectionType, SkeletonType } from '../../interfaces';
 import styles from './styles.module.css';
+// type='banner', direction='column' имеют конкретные значения (type: string direction: string не подходит)
+interface Props {
+    type?: SkeletonType, 
+    count?: number, 
+    direction?: DirectionType
+}
 
-const Sceleton = ({count=1, type='banner', direction='column'}) => {
+const Sceleton = ({count = 1, type='banner', direction='column'}: Props) => {
     
     return(
         <>

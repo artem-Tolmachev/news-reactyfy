@@ -6,17 +6,25 @@
 // Обработки состояний (withState)
 
 import Skeleoton from '../../components/Sceleton/Sceleton';
+import { DirectionType, SkeletonType } from '../../interfaces';
 
-function withSkeleton(Component, type, count, direction){
+interface Props {
+    isLoading: boolean; 
+}
 
-    return function withSkeleton(props){
+function withSkeleton<P extends object>(
+    Component: React.ComponentType<P>, 
+    type?: SkeletonType, 
+    count?: number, 
+    direction?: DirectionType
+){
+    return function withSkeleton(props: Props & P){
         const {isLoading, ...restProps} = props;
-      
+ 
         if(isLoading) {
             return <Skeleoton type={type} count={count} direction={direction}/>;
         }
-
-        return <Component {...restProps}/>;
+        return <Component {...(restProps as P)}/>;
     }
 }
 export default withSkeleton;

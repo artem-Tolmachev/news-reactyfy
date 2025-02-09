@@ -1,6 +1,10 @@
 import styles from './styles.module.css';
 
-const Img = ({image}) => {
+interface Props {
+    image: string;
+}
+
+const Img = ({image}: Props) => {
     return(
         <div className={styles.wrapper}>
             {image ? <img src={image} alt='news' className={styles.image}/> : null}
