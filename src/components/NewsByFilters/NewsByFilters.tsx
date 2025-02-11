@@ -8,7 +8,8 @@ import { useFetch } from '../../helpers/hooks/useFetch';
 import { useDebounce } from '../../helpers/hooks/useDebounce';
 import { getNews } from '../../api/apiNews';
 import PaginationWrapper from '../PaginationWrapper/PaginationWrapper';
-import { ParamsType, NewsApiResponse, INews } from '../../interfaces';
+import { ParamsType, NewsApiResponse } from '../../interfaces';
+
 
 
 const NewsByFilters = () => {
@@ -42,7 +43,10 @@ const NewsByFilters = () => {
 
     return (
         <section className={styles.section}>
-          <NewsFilters filters={filters} changeFilter={changeFilter}/>
+          <NewsFilters 
+          filters={filters}
+          changeFilter={changeFilter}
+           />
           <PaginationWrapper 
             top
             bottom

@@ -13,3 +13,9 @@
 .date{
     font-style: 16px;
 }
+.dark{
+    background-color: #23272f;
+}
+.light{
+    background-color: white;
+}
