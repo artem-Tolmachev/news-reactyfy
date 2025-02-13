@@ -14,10 +14,10 @@ export const useTheme = () => {
     }
     return context;
 }
-
 interface ThemeProviderProps {
     children: ReactNode;
 }
+
 export const ThemeProvider = ({children}: ThemeProviderProps) => {
     const [isDark, setIsdark] = useState(false);
 
